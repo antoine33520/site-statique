@@ -20,16 +20,27 @@ import click
     default="./site",
     help="Dossier où serra déposé le fichier html après conversion. Le chemin vers le dossier doit impérativement se terminer par '\\'",
 )
+@click.option(
+    "-t",
+    "--titre",
+    "trite",
+    default="Titre par défaut à changer",
+    help="Argument a utiliser pour choisir le titre du fichier html",
+)
 # @click.option("-t", "--template-directory", "template_directory", default="", help="")
-def m_t_h(input_file, output_directory):
+def m_t_h(input_file, output_directory, titre):
 
     ifile = input_file
     path, filename = os.path.split(ifile)
     file_name, file_extension = os.path.splitext(filename)
     odir = output_directory
 
-    html_head = '<!DOCTYPE html>\n<html>\n<head>\n<title>TITRE HTML A CHANGER</title>\n</head>\n<body>\n'
-    html_foot = '</body>\n</html>'
+    html_head = (
+        "<!DOCTYPE html>\n<html>\n<head>\n<title>"
+        + titre
+        + "</title>\n</head>\n<body>\n"
+    )
+    html_foot = "</body>\n</html>"
     md_conv = markdown2.markdown_path(ifile)
     html = html_head + md_conv + html_foot
 

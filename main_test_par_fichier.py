@@ -1,6 +1,8 @@
-# coding: utf-8
+# coding=utf-8
 
-import sys, os, glob
+import sys
+import os
+import glob
 import markdown2
 import click
 
@@ -11,28 +13,28 @@ import click
     "--input-file",
     "input_file",
     default="./robustesse.md",
-    help="Chemin vers le fichier Markdown à convertire en html. Parce défaut le fichier './robustesse.md' est utilisé.",
+    help="Chemin vers le fichier Markdown à convertir en HTML. Par défaut le fichier './robustesse.md' est utilisé.",
 )
 @click.option(
     "-o",
     "--output-directory",
     "output_directory",
     default="./",
-    help="Dossier où serra déposé le fichier html après conversion. Le chemin vers le dossier doit impérativement se terminer par '\\' par défaut le dossier à la racine du programme est utilisé'",
+    help="Dossier où sera déposé le fichier HTML après conversion. Le chemin vers le dossier doit impérativement se terminer par '\\' par défaut le dossier à la racine du programme est utilisé",
 )
 @click.option(
     "-t",
     "--titre",
     "titre",
     default="Titre par défaut à changer",
-    help="Argument à utiliser pour choisir le titre du fichier html",
+    help="Argument à utiliser pour choisir le titre du fichier HTML",
 )
-# @click.option("-t", "--template-directory", "template_directory", default="", help="")
 def m_t_h(input_file, output_directory, titre):
 
     ifile = input_file
     path, filename = os.path.split(ifile)
     file_name, file_extension = os.path.splitext(filename)
+
     odir = output_directory
 
     if os.path.exists(ifile) == True and os.path.exists(odir) == True:

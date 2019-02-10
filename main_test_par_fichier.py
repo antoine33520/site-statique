@@ -11,21 +11,21 @@ import click
     "--input-file",
     "input_file",
     default="./markdown/robustesse.md",
-    help="Chemin vers le fichier Markdown à convertire en html.",
+    help="Chemin vers le fichier Markdown à convertire en html. Parce défaut le fichier './markdown/robustesse.md' est utilisé.",
 )
 @click.option(
     "-o",
     "--output-directory",
     "output_directory",
-    default="./site",
-    help="Dossier où serra déposé le fichier html après conversion. Le chemin vers le dossier doit impérativement se terminer par '\\'",
+    default="./site/",
+    help="Dossier où serra déposé le fichier html après conversion. Le chemin vers le dossier doit impérativement se terminer par '\\' par défaut le dossier utilisé est './site/'",
 )
 @click.option(
     "-t",
     "--titre",
-    "trite",
+    "titre",
     default="Titre par défaut à changer",
-    help="Argument a utiliser pour choisir le titre du fichier html",
+    help="Argument à utiliser pour choisir le titre du fichier html",
 )
 # @click.option("-t", "--template-directory", "template_directory", default="", help="")
 def m_t_h(input_file, output_directory, titre):

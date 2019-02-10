@@ -1,4 +1,4 @@
-# -*-coding:utf-8 -*
+# coding: utf-8
 
 import sys, os, glob
 import markdown2
@@ -28,12 +28,11 @@ def m_t_h(input_file, output_directory):
     file_name, file_extension = os.path.splitext(filename)
     odir = output_directory
 
-    html = markdown2.markdown_path(ifile)
-    print(path)
-    print(filename)
-    print(file_name)
-    print(file_extension)
-    print(output_directory)
+    html_head = '<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8" />\n<title>TITRE HTML A CHANGER</title>\n</head>\n<body>\n'
+    html_foot = '</body>\n</html>'
+    md_conv = markdown2.markdown_path(ifile)
+    html = html_head + md_conv + html_foot
+
     f = open("{}{}.html".format(odir, file_name), "w+").write(html)
 
 

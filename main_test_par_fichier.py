@@ -10,15 +10,15 @@ import click
     "-i",
     "--input-file",
     "input_file",
-    default="./markdown/robustesse.md",
-    help="Chemin vers le fichier Markdown à convertire en html. Parce défaut le fichier './markdown/robustesse.md' est utilisé.",
+    default="./robustesse.md",
+    help="Chemin vers le fichier Markdown à convertire en html. Parce défaut le fichier './robustesse.md' est utilisé.",
 )
 @click.option(
     "-o",
     "--output-directory",
     "output_directory",
-    default="./site/",
-    help="Dossier où serra déposé le fichier html après conversion. Le chemin vers le dossier doit impérativement se terminer par '\\' par défaut le dossier utilisé est './site/'",
+    default="./",
+    help="Dossier où serra déposé le fichier html après conversion. Le chemin vers le dossier doit impérativement se terminer par '\\' par défaut le dossier à la racine du programme est utilisé'",
 )
 @click.option(
     "-t",
@@ -35,16 +35,27 @@ def m_t_h(input_file, output_directory, titre):
     file_name, file_extension = os.path.splitext(filename)
     odir = output_directory
 
-    html_head = (
-        "<!DOCTYPE html>\n<html>\n<head>\n<title>"
-        + titre
-        + "</title>\n</head>\n<body>\n"
-    )
-    html_foot = "</body>\n</html>"
-    md_conv = markdown2.markdown_path(ifile)
-    html = html_head + md_conv + html_foot
+    if os.path.exists(ifile) == True and os.path.exists(odir) == True:
 
-    f = open("{}{}.html".format(odir, file_name), "w+").write(html)
+        html_head = (
+            "<!DOCTYPE html>\n<html>\n<head>\n<title>"
+            + titre
+            + "</title>\n</head>\n<body>\n"
+        )
+        html_foot = "</body>\n</html>"
+        md_conv = markdown2.markdown_path(ifile)
+        html = html_head + md_conv + html_foot
+
+        f = open("{}{}.html".format(odir, file_name), "w+").write(html)
+
+    elif os.path.exists(ifile) == True and os.path.exists(odir) == False:
+        print("Le dossier de destination n'existe pas !")
+    elif os.path.exists(ifile) == False and os.path.exists(odir) == True:
+        print("Le fichier indiqué n'existe pas !")
+    elif os.path.exists(ifile) == False and os.path.exists(odir) == False:
+        print("Le fichier indiqué et le dossier de destination n'existent pas !")
+    else:
+        pass
 
 
 if __name__ == "__main__":

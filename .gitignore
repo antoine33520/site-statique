@@ -103,3 +103,14 @@ venv.bak/
 # mypy
 .mypy_cache/
 markdown2_help.py
+markdown/1.md
+markdown/2.md
+markdown/4.md
+markdown/5.md
+markdown/3.md
+markdown/README.md
+markdown/lexique.md
+markdown/procedures.md
+markdown/6.md
+markdown/procedures-cisco.md
+markdown/robustesse.md

@@ -1,8 +1,9 @@
 # -*-coding:utf-8 -*
 
-import sys, os, glob
+import sys, os
 import markdown2
 import click
+import re
 
 
 @click.command()
@@ -45,7 +46,17 @@ def m_t_h(input_directory, output_directory, titre):
         i = 0
         for e in idir:
             file_name, file_extension = os.path.splitext(files[i])
-            md_conv = markdown2.markdown_path(idir +  files[i])
+            link_patterns = [
+                (
+                    re.compile(
+                        r"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+(:[0-9]+)?|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)"
+                    ),
+                    r"\1",
+                )
+            ]
+            md_conv = markdown2.markdown_path(
+                idir + files[i], extras=["link-patterns"], link_patterns=link_patterns
+            )
             html = html_head + md_conv + html_foot
             f = open("{}{}.html".format(odir, file_name), "w+", encoding="utf-8").write(
                 html
@@ -64,3 +75,4 @@ def m_t_h(input_directory, output_directory, titre):
 
 if __name__ == "__main__":
     m_t_h()
+

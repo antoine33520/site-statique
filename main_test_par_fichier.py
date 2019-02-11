@@ -2,7 +2,7 @@
 
 import sys
 import os
-import glob
+import re
 import markdown2
 import click
 
@@ -26,7 +26,7 @@ import click
     "-t",
     "--titre",
     "titre",
-    default="Titre par défaut à changer",
+    default="Markdown to HTML",
     help="Argument à utiliser pour choisir le titre du fichier HTML, sans spécification manuelle le titre 'Markdown to HTML' sera utilisé.",
 )
 def m_t_h(input_file, output_directory, titre):
@@ -34,6 +34,14 @@ def m_t_h(input_file, output_directory, titre):
     ifile = input_file
     path, filename = os.path.split(ifile)
     file_name, file_extension = os.path.splitext(filename)
+    link_patterns = [
+        (
+            re.compile(
+                r"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+(:[0-9]+)?|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)"
+            ),
+            r"\1",
+        )
+    ]
 
     odir = output_directory
 
@@ -45,7 +53,9 @@ def m_t_h(input_file, output_directory, titre):
             + "</title>\n</head>\n<body>\n"
         )
         html_foot = "</body>\n</html>"
-        md_conv = markdown2.markdown_path(ifile)
+        md_conv = markdown2.markdown_path(
+            ifile, extras=["link-patterns"], link_patterns=link_patterns
+        )
         html = html_head + md_conv + html_foot
 
         f = open("{}{}.html".format(odir, file_name), "w+", encoding="utf-8").write(

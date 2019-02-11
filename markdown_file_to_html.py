@@ -37,7 +37,7 @@ def m_t_h(input_file, output_directory, titre):
     if os.path.exists(ifile) == True and os.path.exists(odir) == True:
 
         html_head = (
-            "<!DOCTYPE html>\n<html>\n<head>\n<title>"
+            '<!DOCTYPE html>\n<html>\n<head>\n<meta charset="UTF-8">\n<title>'
             + titre
             + "</title>\n</head>\n<body>\n"
         )
@@ -45,7 +45,9 @@ def m_t_h(input_file, output_directory, titre):
         md_conv = markdown2.markdown_path(ifile)
         html = html_head + md_conv + html_foot
 
-        f = open("{}{}.html".format(odir, file_name), "w+").write(html)
+        f = open("{}{}.html".format(odir, file_name), "w+", encoding="utf-8").write(
+            html
+        )
 
     elif os.path.exists(ifile) == True and os.path.exists(odir) == False:
         print("Le dossier de destination n'existe pas !")

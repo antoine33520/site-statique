@@ -1,0 +1,11 @@
+REQUIREMENTS:
+
+Markdown2:
+    pip install markdown2 (for Windows)
+        or
+    pip3 install markdown2 (for linux)
+
+Click:
+    pip install click (for Windows)
+        or
+    pip3 install click (for linux)

@@ -44,32 +44,24 @@ def m_t_h(input_file, output_directory, titre):
     ]
 
     odir = output_directory
-
-    if os.path.exists(ifile) == True and os.path.exists(odir) == True:
-
-        html_head = (
-            '<!DOCTYPE html>\n<html>\n<head>\n<meta charset="UTF-8">\n<title>'
-            + titre
-            + "</title>\n</head>\n<body>\n"
-        )
-        html_foot = "</body>\n</html>"
-        md_conv = markdown2.markdown_path(
-            ifile, extras=["link-patterns"], link_patterns=link_patterns
-        )
-        html = html_head + md_conv + html_foot
-
-        f = open("{}{}.html".format(odir, file_name), "w+", encoding="utf-8").write(
-            html
-        )
-
-    elif os.path.exists(ifile) == True and os.path.exists(odir) == False:
-        print("Le dossier de destination n'existe pas !")
-    elif os.path.exists(ifile) == False and os.path.exists(odir) == True:
-        print("Le fichier indiqué n'existe pas !")
-    elif os.path.exists(ifile) == False and os.path.exists(odir) == False:
-        print("Le fichier indiqué et le dossier de destination n'existent pas !")
+    if os.path.exists(odir) == False:
+        os.mkdir(odir)
+        pass
     else:
         pass
+
+    html_head = (
+        '<!DOCTYPE html>\n<html>\n<head>\n<meta charset="UTF-8">\n<title>'
+        + titre
+        + "</title>\n</head>\n<body>\n"
+    )
+    html_foot = "</body>\n</html>"
+    md_conv = markdown2.markdown_path(
+        ifile, extras=["link-patterns"], link_patterns=link_patterns
+    )
+    html = html_head + md_conv + html_foot
+
+    f = open("{}{}.html".format(odir, file_name), "w+", encoding="utf-8").write(html)
 
 
 if __name__ == "__main__":

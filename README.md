@@ -56,8 +56,8 @@ Ce dépôt contient quatres programmes python :
 
 - **markdown_file_to_html.py**
   Permet la conversion d'un fichier markdown vers un fichier html dans le dossier de destination indiqué.
-  Il existe une autre version du fichier "main_test_par_fichier.py" qui est la version de test de la version stable. Cette version peut possiblement contenir des modifications non présente dans la version stable.
+  Il existe une autre version du fichier `main_test_par_fichier.py` qui est la version de test de la version stable. Cette version peut possiblement contenir des modifications non présente dans la version stable.
 
 - **markdown_folder_to_html.py**
   Permet la conversion de tous les fichiers markdown contenu dans un dossier vers des fichiers html dans le dossier de destination indiqué.
-  Il existe une autre version du fichier "main_test_par_dossier.py qui est la version de test de la version stable. Cette version peut possiblement contenir des modifications non présente dans la version stable.
+  Il existe une autre version du fichier `main_test_par_dossier.py` qui est la version de test de la version stable. Cette version peut possiblement contenir des modifications non présente dans la version stable.
